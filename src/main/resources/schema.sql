@@ -1,0 +1,1 @@
+CREATE SCHEMA IF NOT EXISTS sumUp_api_wallet_db;
