@@ -30,7 +30,11 @@ public class WalletController {
 
     @PostMapping("/{id}/deposit")
     public ResponseEntity<Wallet> deposit(@PathVariable Long id, @RequestParam Double amount) {
-        return ResponseEntity.ok(walletService.deposit(id, amount));
+        try {
+            return ResponseEntity.ok(walletService.deposit(id, amount));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/{id}/withdraw")
@@ -38,7 +42,12 @@ public class WalletController {
         try {
             return ResponseEntity.ok(walletService.withdraw(id, amount));
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(null);
+            switch (e.getMessage()) {
+                case "Wallet not found":
+                    return ResponseEntity.notFound().build();
+                default:
+                    return ResponseEntity.badRequest().body(null);
+            }
         }
     }
 }
