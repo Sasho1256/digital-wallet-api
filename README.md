@@ -1,5 +1,5 @@
 # Description
-This project is a RESTful API built in Java using the Spring Boot framework. It serves as a digital wallet, that offers the following functionalities: 
+This [project](https://github.com/Sasho1256/sumUp_api) is a RESTful API built in Java using the Spring Boot framework. It serves as a digital wallet, that offers the following functionalities: 
 - Creating a wallet using a username
 - Accessing wallet details using the wallet's ID
 - Deposit and withdrawal operations
