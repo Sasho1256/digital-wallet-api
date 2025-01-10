@@ -4,6 +4,7 @@ import com.atm.sumUp_api.models.Wallet;
 import com.atm.sumUp_api.repos.WalletRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -24,18 +25,18 @@ public class WalletService {
         return walletRepository.findById(id);
     }
 
-    public Wallet deposit(Long id, Double amount) {
+    public Wallet deposit(Long id, BigDecimal amount) {
         Wallet wallet = walletRepository.findById(id).orElseThrow(() -> new RuntimeException("Wallet not found"));
-        wallet.setBalance(wallet.getBalance() + amount);
+        wallet.setBalance(wallet.getBalance().add(amount));
         return walletRepository.save(wallet);
     }
 
-    public Wallet withdraw(Long id, Double amount) {
+    public Wallet withdraw(Long id, BigDecimal amount) {
         Wallet wallet = walletRepository.findById(id).orElseThrow(() -> new RuntimeException("Wallet not found"));
-        if (wallet.getBalance() < amount) {
+        if (wallet.getBalance().compareTo(amount) == -1) {
             throw new RuntimeException("Insufficient balance");
         }
-        wallet.setBalance(wallet.getBalance() - amount);
+        wallet.setBalance(wallet.getBalance().subtract(amount));
         return walletRepository.save(wallet);
     }
 }

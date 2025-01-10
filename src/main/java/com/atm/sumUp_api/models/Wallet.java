@@ -1,5 +1,7 @@
 package com.atm.sumUp_api.models;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -9,10 +11,10 @@ public class Wallet {
     private Long id;
 
     private String username;
-    private Double balance;
+    private BigDecimal balance;
 
     public Wallet() {
-        this.balance = 0.0;
+        this.balance = new BigDecimal("0.0");
     }
 
     public String getUsername(){
@@ -22,10 +24,10 @@ public class Wallet {
         this.username = username;
     }
 
-    public Double getBalance(){
+    public BigDecimal getBalance(){
         return this.balance;
     }
-    public void setBalance(Double balance){
+    public void setBalance(BigDecimal balance){
         this.balance = balance;
     }
 }

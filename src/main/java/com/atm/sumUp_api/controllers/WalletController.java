@@ -6,6 +6,7 @@ import com.atm.sumUp_api.services.WalletService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
@@ -29,7 +30,7 @@ public class WalletController {
     }
 
     @PostMapping("/{id}/deposit")
-    public ResponseEntity<Wallet> deposit(@PathVariable Long id, @RequestParam Double amount) {
+    public ResponseEntity<Wallet> deposit(@PathVariable Long id, @RequestParam BigDecimal amount) {
         try {
             return ResponseEntity.ok(walletService.deposit(id, amount));
         } catch (RuntimeException e) {
@@ -38,7 +39,7 @@ public class WalletController {
     }
 
     @PostMapping("/{id}/withdraw")
-    public ResponseEntity<Wallet> withdraw(@PathVariable Long id, @RequestParam Double amount) {
+    public ResponseEntity<Wallet> withdraw(@PathVariable Long id, @RequestParam BigDecimal amount) {
         try {
             return ResponseEntity.ok(walletService.withdraw(id, amount));
         } catch (RuntimeException e) {
